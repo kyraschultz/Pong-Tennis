@@ -100,7 +100,7 @@ running = True
 while running:
 	screen.fill((0, 0, 0))
 	clock.tick(40)
-for event in pygame.event.get():
+	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			pygame.quit()
 			exit()
@@ -119,131 +119,129 @@ for event in pygame.event.get():
 			if event.key == pygame.K_UP or event.key == pygame.K_DOWN or event.key == pygame.K_w or event.key == pygame.K_s:
 				playerOneChange = 0
 				playerTwoChange = 0
-playerOneY += playerOneChange
-playerTwoY += playerTwoChange
-playerOneRect.topleft = (playerOneX - 15, playerOneY - 32)
-playerTwoRect.topleft = (playerTwoX, playerTwoY - 32)
-ballRect.topleft = (ballX, ballY)
-starRect.topleft = (starX, starY)
+	playerOneY += playerOneChange
+	playerTwoY += playerTwoChange
+	playerOneRect.topleft = (playerOneX - 15, playerOneY - 32)
+	playerTwoRect.topleft = (playerTwoX, playerTwoY - 32)
+	ballRect.topleft = (ballX, ballY)
+	starRect.topleft = (starX, starY)
 
-win_sound = mixer.Sound('win.wav')
-if score1_value == 10:
-    win_sound.play()
-    game_over_text("1")
-    running = False
-elif score2_value == 10:
-	win_sound.play()
-	game_over_text("2")
-	running = False
+	win_sound = mixer.Sound('win.wav')
+	if score1_value == 10:
+		win_sound.play()
+		game_over_text("1")
+		running = False
+	elif score2_value == 10:
+		win_sound.play()
+		game_over_text("2")
+		running = False
 
-power_sound = mixer.Sound('power.mp3')
-if score1_value >= 5 or score2_value >= 5:
-	star(starX, starY)
-	if ballRect.colliderect(starRect) and ballXChange < 0:
-		power_sound.play()
-		ballXChange = -1
-		if ballYChange > 0:
-			ballYChange = -1
-		elif ballYChange < 0:
-			ballYChange = 1
-		starX = random.randint(250, 550)
-		starY = random.randint(150, 450)
-	elif ballRect.colliderect(starRect) and ballXChange > 0:
-		power_sound.play()
-    	ballXChange = 1
-        if ballYChange > 0:
-            ballYChange = -1
-        elif ballYChange < 0:
-            ballYChange = 1
-        starX = random.randint(250, 550)
-        starY = random.randint(150, 450)
-##KEEP UNINDENTING
-if playerOneY <= 0:
-    	playerOneY = 0
-    elif playerOneY >= 575:
-        playerOneY = 575
+	power_sound = mixer.Sound('power.mp3')
+	if score1_value >= 5 or score2_value >= 5:
+		star(starX, starY)
+		if ballRect.colliderect(starRect) and ballXChange < 0:
+			power_sound.play()
+			ballXChange = -1
+			if ballYChange > 0:
+				ballYChange = -1
+			elif ballYChange < 0:
+				ballYChange = 1
+			starX = random.randint(250, 550)
+			starY = random.randint(150, 450)
+		elif ballRect.colliderect(starRect) and ballXChange > 0:
+			power_sound.play()
+			ballXChange = 1
+			if ballYChange > 0:
+				ballYChange = -1
+			elif ballYChange < 0:
+				ballYChange = 1
+			starX = random.randint(250, 550)
+			starY = random.randint(150, 450)
+	if playerOneY <= 0:
+		playerOneY = 0
+	elif playerOneY >= 575:
+		playerOneY = 575
 
-    if playerTwoY <= 0:
-        playerTwoY = 0
-    elif playerTwoY >= 575:
-        playerTwoY = 575
+	if playerTwoY <= 0:
+		playerTwoY = 0
+	elif playerTwoY >= 575:
+		playerTwoY = 575
 
-    ballX += ballXChange
-    ballY += ballYChange
+	ballX += ballXChange
+	ballY += ballYChange
 
-    if (ballX == 375 and ballY == 270 and ballXChange == 0
-            and ballYChange == 0):
-        ballXChange = .2
-        ballYChange = .2
+	if (ballX == 375 and ballY == 270 and ballXChange == 0 and ballYChange == 0):
+		ballXChange = .2
+		ballYChange = .2
 
-    if (ballX == playerOneX and ballY == playerOneY):
-        if (ballY > 250):
-            ballXChange = .5
-            ballYChange = .5
-        elif (ballY <= 250):
-            ballXChange = .5
-            ballYChange = -.5
+	if (ballX == playerOneX and ballY == playerOneY):
+		if (ballY > 250):
+			ballXChange = .5
+			ballYChange = .5
+		elif (ballY <= 250):
+			ballXChange = .5
+			ballYChange = -.5
 
     #hit_sound = mixer.Sound('click.wav')
-    if collision:
-        if ballRect.colliderect(playerOneRect):  #changes directions the same way everytime... i need to fix this
+	if collision:
+		if ballRect.colliderect(playerOneRect):  #changes directions the same way everytime... i need to fix this
             #hit_sound.play()
-            if (ballY > 250):
-                ballXChange = .5
-                if ballY > playerOneY:
-                    ballYChange = -.2
-                elif ballY < playerOneY:
-                    ballYChange = .5
-                else:
-                    ballYChange = .1
-            elif (ballY <= 250):
-                ballXChange = .5
-                if ballY > playerOneY:
-                    ballYChange = -.7
-                elif ballY < playerOneY:
-                    ballYChange = .5
-                else:
-                    ballYChange = .1
-        elif ballRect.colliderect(playerTwoRect):
+			if (ballY > 250):
+				ballXChange = .5
+				if ballY > playerOneY:
+					ballYChange = -.2
+				elif ballY < playerOneY:
+					ballYChange = .5
+				else:
+					ballYChange = .1
+			elif (ballY <= 250):
+				ballXChange = .5
+				if ballY > playerOneY:
+					ballYChange = -.7
+				elif ballY < playerOneY:
+					ballYChange = .5
+				else:
+					ballYChange = .1
+		elif ballRect.colliderect(playerTwoRect):
             #hit_sound.play()
-            if (ballY > 250):
-                ballXChange = -.5
-                if ballY > playerTwoY:
-                    ballYChange = -.2
-                elif ballY < playerTwoY:
-                    ballYChange = .5
-                else:
-                    ballYChange = .1
-            elif (ballY <= 250):
-                ballXChange = -.5
-                if ballY > playerTwoY:
-                    ballYChange = -.7
-                elif ballY < playerTwoY:
-                    ballYChange = .5
-                else:
-                    ballYChange = .1
-    if (ballY >= 600):
-        ballYChange = -.5
-    elif (ballY <= 0):
-        ballYChange = .5
-    if (ballX < 0 or ballX > 800):
-        time.sleep(.1)
+			if (ballY > 250):
+				ballXChange = -.5
+				if ballY > playerTwoY:
+					ballYChange = -.2
+				elif ballY < playerTwoY:
+					ballYChange = .5
+				else:
+					ballYChange = .1
+			elif (ballY <= 250):
+				ballXChange = -.5
+				if ballY > playerTwoY:
+					ballYChange = -.7
+				elif ballY < playerTwoY:
+					ballYChange = .5
+				else:
+					ballYChange = .1
+	if (ballY >= 600):
+		ballYChange = -.5
+	elif (ballY <= 0):
+		ballYChange = .5
+	if (ballX < 0 or ballX > 800):
+		time.sleep(.1)
         #beep_sound = mixer.Sound('beep.aiff')
         #beep_sound.play()
-        if ballX < 0:
-            score2_value += 1
-        elif ballX > 800:
-            score1_value += 1
-        ballX = 375
-        ballY = 270
-        ballXChange = 0
-        ballYChange = 0
+		if ballX < 0:
+			score2_value += 1
+		elif ballX > 800:
+			score1_value += 1
+		ballX = 375
+		ballY = 270
+		ballXChange = 0
+		ballYChange = 0
 
-    ballX += ballXChange
-    ballY += ballYChange
-    ball(ballX, ballY)
-    player(playerOneX, playerOneY)
-    player(playerTwoX, playerTwoY)
-    show_score(text1X, text2X, textY)
-    pygame.display.update()
+	ballX += ballXChange
+	ballY += ballYChange
+	ball(ballX, ballY)
+	player(playerOneX, playerOneY)
+	player(playerTwoX, playerTwoY)
+	show_score(text1X, text2X, textY)
+	pygame.display.update()
 	
